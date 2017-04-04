@@ -15,9 +15,9 @@ str6=argvs[3]
 url = str1 + str2 + str3 + str4 + str5 + str6
 r = requests.get(url)
 
-print r.status_code
+#print r.status_code
 j = r.json()
-print j
+print str(str2) + ";" + str(j)
 
 
 

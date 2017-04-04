@@ -17,7 +17,7 @@ r = requests.get(url)
 
 #print r.status_code
 j = r.json()
-print str(str2) + "," + str(j)
+print str(str2) + ";" + str(j)
 
 
 
