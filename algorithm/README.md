@@ -7,5 +7,9 @@
 <img src="quick-1000.png" width=30% height=30%><img src="quick-3000.png" width=30% height=30%>
 <img src="quick-5000.png" width=30% height=30%><img src="quick-7000.png" width=30% height=30%>
 
+# merge sort
+<img src="merge-1000.png" width=30% height=30%><img src="merge-3000.png" width=30% height=30%>
+<img src="merge-5000.png" width=30% height=30%><img src="merge-7000.png" width=30% height=30%>
+
 
 
