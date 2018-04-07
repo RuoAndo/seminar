@@ -13,5 +13,9 @@
 <img src="merge-8000.png" width=30% height=30%><img src="merge-8500.png" width=30% height=30%>
 <img src="merge-9000.png" width=30% height=30%><img src="merge-9500.png" width=30% height=30%>
 
+# insert sort
+<img src="insert-1000.png" width=30% height=30%><img src="insert-3000.png" width=30% height=30%>
+<img src="insert-5000.png" width=30% height=30%><img src="insert-7000.png" width=30% height=30%>
+
 
 
