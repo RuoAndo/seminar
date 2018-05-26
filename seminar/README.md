@@ -2,7 +2,7 @@
 python cut.py list > list-cut
 ./geoip.sh list-cut  > tmp
 python 2.py tmp list-cut > 100.kml
-<pre>
+</pre>
 
 list
 <pre>
