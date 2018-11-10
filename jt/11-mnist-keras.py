@@ -1,10 +1,3 @@
-# coding: utf-8
-
-# **[MSE-01]** モジュールをインポートして、乱数のシードを設定します。
-
-# In[1]:
-
-
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,19 +5,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 np.random.seed(20160604)
 
-
-# **[MSE-02]** MNISTのデータセットを用意します。
-
-# In[2]:
-
-
 mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
-
-
-# **[MSE-03]** ソフトマックス関数による確率 p の計算式を用意します。
-
-# In[3]:
-
 
 x = tf.placeholder(tf.float32, [None, 784])
 w = tf.Variable(tf.zeros([784, 10]))
@@ -32,43 +13,15 @@ w0 = tf.Variable(tf.zeros([10]))
 f = tf.matmul(x, w) + w0
 p = tf.nn.softmax(f)
 
-
-# **[MSE-04]** 誤差関数 loss とトレーニングアルゴリズム train_step を用意します。
-
-# In[4]:
-
-
 t = tf.placeholder(tf.float32, [None, 10])
 loss = -tf.reduce_sum(t * tf.log(p))
 train_step = tf.train.AdamOptimizer().minimize(loss)
 
-
-# **[MSE-05]** 正解率 accuracy を定義します。
-
-# In[5]:
-
-
 correct_prediction = tf.equal(tf.argmax(p, 1), tf.argmax(t, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-
-# **[MSE-06]** セッションを用意して、Variableを初期化します。
-
-# In[6]:
-
-
 sess = tf.Session()
 sess.run(tf.initialize_all_variables())
-
-
-# **[MSE-07]** パラメーターの最適化を2000回繰り返します。
-# 
-# 1回の処理において、トレーニングセットから取り出した100個のデータを用いて、勾配降下法を適用します。
-# 
-# 最終的に、テストセットに対して約92%の正解率が得られます。
-
-# In[7]:
-
 
 i = 0
 for _ in range(2000):
@@ -80,14 +33,6 @@ for _ in range(2000):
             feed_dict={x:mnist.test.images, t: mnist.test.labels})
         print ('Step: %d, Loss: %f, Accuracy: %f'
                % (i, loss_val, acc_val))
-
-
-# **[MSE-08]** この時点のパラメーターを用いて、テストセットに対する予測を表示します。
-# 
-# ここでは、「０」?「９」の数字に対して、正解と不正解の例を３個ずつ表示します。
-
-# In[8]:
-
 
 images, labels = mnist.test.images, mnist.test.labels
 p_val = sess.run(p, feed_dict={x:images, t: labels}) 
@@ -106,6 +51,7 @@ for i in range(10):
             subplot.set_title('%d / %d' % (prediction, actual))
             subplot.imshow(image.reshape((28,28)), vmin=0, vmax=1,
                            cmap=plt.cm.gray_r, interpolation="nearest")
+            #plt.show()
             c += 1
             if c > 6:
                 break
