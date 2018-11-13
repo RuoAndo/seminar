@@ -1,4 +1,8 @@
-#-*- coding:utf-8 -*-                                                                                                                    
+#-*- coding:utf-8 -*-
+
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 import tensorflow as tf
 
 a = tf.constant(3, name='const1')

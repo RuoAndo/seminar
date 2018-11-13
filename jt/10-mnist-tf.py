@@ -5,6 +5,9 @@ from tensorflow.examples.tutorials.mnist import input_data
 from tensorflow.python.framework import ops
 ops.reset_default_graph()
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 sess = tf.Session()
 
 data_dir = 'temp'

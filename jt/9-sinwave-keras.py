@@ -8,6 +8,9 @@ from keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(0)
 
 

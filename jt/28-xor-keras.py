@@ -3,6 +3,9 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation
 from keras.optimizers import SGD
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(123)
 
 # XORゲート

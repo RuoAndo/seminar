@@ -10,6 +10,9 @@ from sklearn.utils import shuffle
 from sklearn.datasets.base import get_data_home 
 from sklearn.datasets import fetch_mldata
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(0)
 tf.set_random_seed(1234)
 

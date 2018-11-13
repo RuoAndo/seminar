@@ -5,6 +5,9 @@ from keras.layers import Dense, Activation
 from keras.optimizers import SGD
 from sklearn.utils import shuffle
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(0)
 
 M = 2 # input

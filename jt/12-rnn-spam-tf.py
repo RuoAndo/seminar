@@ -11,6 +11,9 @@ from zipfile import ZipFile
 from tensorflow.python.framework import ops
 ops.reset_default_graph()
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 sess = tf.Session()
 
 # RNNのパラメータのセットアップ

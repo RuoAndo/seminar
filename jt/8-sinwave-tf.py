@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(0)
 tf.set_random_seed(1234)
 

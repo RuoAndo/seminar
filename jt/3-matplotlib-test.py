@@ -1,6 +1,9 @@
 # coding: utf-8
 # Matplotlib example
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 #matplotlib inline
 import matplotlib.pyplot as plt
 import numpy as np

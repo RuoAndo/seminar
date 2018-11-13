@@ -4,6 +4,9 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 learning_ratio = 0.1
 training_epochs = 2000
 

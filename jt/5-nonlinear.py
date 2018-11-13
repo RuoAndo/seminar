@@ -7,6 +7,9 @@ from numpy.random import multivariate_normal, permutation
 import pandas as pd
 from pandas import DataFrame, Series
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(20160615)
 tf.set_random_seed(20160615)
 

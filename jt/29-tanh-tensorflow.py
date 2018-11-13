@@ -7,6 +7,9 @@ from sklearn.utils import shuffle
 from six.moves import urllib
 from sklearn.datasets import fetch_mldata
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(0)
 tf.set_random_seed(123)
 

@@ -8,6 +8,9 @@ import matplotlib.pyplot as plt
 from sklearn.datasets.base import get_data_home 
 from sklearn.datasets import fetch_mldata
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(123)
 mnist = datasets.fetch_mldata('MNIST original')
 

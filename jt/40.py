@@ -4,6 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.examples.tutorials.mnist import input_data
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(20181112)
 tf.set_random_seed(20181112)
 

@@ -8,6 +8,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.datasets.base import get_data_home 
 from sklearn.datasets import fetch_mldata
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(0)
 print (get_data_home())
 # cp mnist_data/mldata/mnist-original.mat /home/flare/scikit_learn_dat

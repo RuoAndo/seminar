@@ -2,6 +2,9 @@
 from tensorflow.examples.tutorials.mnist import input_data
 import tensorflow as tf
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 mnist = input_data.read_data_sets("data/", one_hot=True)
 
 x = tf.placeholder(tf.float32, [None, 784])

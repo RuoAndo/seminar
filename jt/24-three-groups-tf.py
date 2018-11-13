@@ -2,6 +2,9 @@ import numpy as np
 import tensorflow as tf
 from sklearn.utils import shuffle
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 np.random.seed(0)
 tf.set_random_seed(0)
 

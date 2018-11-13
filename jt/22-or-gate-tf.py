@@ -1,6 +1,9 @@
 import numpy as np
 import tensorflow as tf
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 tf.set_random_seed(0)
 
 w = tf.Variable(tf.zeros([2, 1]))
