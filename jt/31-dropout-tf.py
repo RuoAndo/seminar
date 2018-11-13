@@ -4,10 +4,31 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
+#from scipy.io import loadmat
+#from six.moves import urllib
+#from sklearn.datasets import fetch_mldata
+from sklearn.datasets.base import get_data_home 
+from sklearn.datasets import fetch_mldata
+
 np.random.seed(0)
 tf.set_random_seed(1234)
 
-mnist = datasets.fetch_mldata('MNIST original', data_home='.')
+#mnist = fetch_mldata('MNIST original', data_home='./mnist_data/')
+#mnist = fetch_mldata('MNIST original')
+#mnist = datasets.fetch_mldata('MNIST original', data_home='
+
+#mnist_raw = loadmat("./mnist_data/mldata/mnist-original.mat")
+#mnist = {
+#    "data": mnist_raw["data"].T,
+#    "target": mnist_raw["label"][0],
+#    "COL_NAMES": ["label", "data"],
+#    "DESCR": "mldata.org dataset: mnist-original",
+#}
+
+print (get_data_home())
+# cp mnist_data/mldata/mnist-original.mat /home/flare/scikit_learn_dat
+#mnist = fetch_mldata('MNIST original')
+mnist = fetch_mldata('MNIST original')
 
 n = len(mnist.data)
 N = 10000
