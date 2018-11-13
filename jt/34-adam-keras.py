@@ -5,9 +5,11 @@ from keras.optimizers import Adam
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+from sklearn.datasets.base import get_data_home 
+from sklearn.datasets import fetch_mldata
 
 np.random.seed(123)
-mnist = datasets.fetch_mldata('MNIST original', data_home='.')
+mnist = datasets.fetch_mldata('MNIST original')
 
 n = len(mnist.data)
 N = 30000

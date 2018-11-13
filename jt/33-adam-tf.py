@@ -5,6 +5,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 import matplotlib.pyplot as plt
 
+from sklearn.datasets.base import get_data_home 
+from sklearn.datasets import fetch_mldata
+
 np.random.seed(0)
 tf.set_random_seed(1234)
 
@@ -61,7 +64,7 @@ def accuracy(y, t):
 
 
 if __name__ == '__main__':
-    mnist = datasets.fetch_mldata('MNIST original', data_home='.')
+    mnist = datasets.fetch_mldata('MNIST original')
 
     n = len(mnist.data)
     N = 30000

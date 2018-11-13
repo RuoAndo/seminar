@@ -5,9 +5,15 @@ from keras.optimizers import SGD
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
-np.random.seed(0)
+from sklearn.datasets.base import get_data_home 
+from sklearn.datasets import fetch_mldata
 
-mnist = datasets.fetch_mldata('MNIST original', data_home='.')
+np.random.seed(0)
+print (get_data_home())
+# cp mnist_data/mldata/mnist-original.mat /home/flare/scikit_learn_dat
+#mnist = fetch_mldata('MNIST original')
+mnist = fetch_mldata('MNIST original')
+#mnist = datasets.fetch_mldata('MNIST original', data_home='.')
 
 n = len(mnist.data)
 N = 10000  
