@@ -19,5 +19,10 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init)
 
-    for i in range(3):
-        print(sess.run(mul, feed_dict={c:3}))         
+    for i in range(4):
+        print(sess.run(mul, feed_dict={c:4}))         
+
+#        12:  3*4
+#        24:  3*4*2
+#        36
+#        48
