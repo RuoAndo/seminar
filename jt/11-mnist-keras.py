@@ -6,7 +6,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-np.random.seed(20160604)
+np.random.seed(20181128)
 
 mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
