@@ -19,7 +19,7 @@ test_xdata = np.array([np.reshape(x, (28, 28)) for x in mnist.test.images])
 train_labels = mnist.train.labels
 test_labels = mnist.test.labels
 
-batch_size = 100
+size_of_batch = 100
 learning_rate = 0.005
 evaluation_size = 500
 image_width = train_xdata[0].shape[0]
@@ -34,9 +34,9 @@ max_pool_size1 = 2
 max_pool_size2 = 2
 fully_connected_size1 = 100
 
-x_input_shape = (batch_size, image_width, image_height, num_channels)
+x_input_shape = (size_of_batch, image_width, image_height, num_channels)
 x_input = tf.placeholder(tf.float32, shape=x_input_shape)
-y_target = tf.placeholder(tf.int32, shape=(batch_size))
+y_target = tf.placeholder(tf.int32, shape=(size_of_batch))
 eval_input_shape = (evaluation_size, image_width, image_height, num_channels)
 eval_input = tf.placeholder(tf.float32, shape=eval_input_shape)
 eval_target = tf.placeholder(tf.int32, shape=(evaluation_size))
@@ -102,7 +102,7 @@ train_loss = []
 train_acc = []
 test_acc = []
 for i in range(generations):
-    rand_index = np.random.choice(len(train_xdata), size=batch_size)
+    rand_index = np.random.choice(len(train_xdata), size=size_of_batch)
     rand_x = train_xdata[rand_index]
     rand_x = np.expand_dims(rand_x, 3)
     rand_y = train_labels[rand_index]
