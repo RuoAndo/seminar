@@ -11,7 +11,7 @@ np.random.seed(0)
 tf.set_random_seed(1234)
 
 
-def inference(x, n_batch, maxlen=None, n_hidden=None, n_out=None):
+def network_structure(x, n_batch, maxlen=None, n_hidden=None, n_out=None):
     def weight_variable(shape):
         initial = tf.truncated_normal(shape, stddev=0.01)
         return tf.Variable(initial)
@@ -79,13 +79,13 @@ if __name__ == '__main__':
     def sin(x, T=100):
         return np.sin(2.0 * np.pi * x / T)
 
-    def toy_problem(T=100, ampl=0.05):
+    def gen_data(T=100, ampl=0.05):
         x = np.arange(0, 2 * T + 1)
         noise = ampl * np.random.uniform(low=-1.0, high=1.0, size=len(x))
         return sin(x) + noise
 
     T = 100
-    f = toy_problem(T)
+    f = gen_data(T)
 
     length_of_sequences = 2 * T  
     maxlen = 25 
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     t = tf.placeholder(tf.float32, shape=[None, n_out])
     n_batch = tf.placeholder(tf.int32, shape=[])
 
-    y = inference(x, n_batch, maxlen=maxlen, n_hidden=n_hidden, n_out=n_out)
+    y = network_structure(x, n_batch, maxlen=maxlen, n_hidden=n_hidden, n_out=n_out)
     loss = loss(y, t)
     train_step = training(loss)
 
@@ -180,7 +180,7 @@ if __name__ == '__main__':
     plt.rc('font', family='serif')
     plt.figure()
     plt.ylim([-1.5, 1.5])
-    plt.plot(toy_problem(T, ampl=0), linestyle='dotted', color='#aaaaaa')
+    plt.plot(gen_data(T, ampl=0), linestyle='dotted', color='#aaaaaa')
     plt.plot(original, linestyle='dashed', color='black')
     plt.plot(predicted, color='black')
     plt.show()

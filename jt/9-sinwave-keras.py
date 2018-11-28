@@ -18,13 +18,13 @@ def sin(x, T=100):
     return np.sin(2.0 * np.pi * x / T)
 
 
-def toy_problem(T=100, ampl=0.05):
+def gen_Data(T=100, ampl=0.05):
     x = np.arange(0, 2 * T + 1)
     noise = ampl * np.random.uniform(low=-1.0, high=1.0, size=len(x))
     return sin(x) + noise
 
 T = 100
-f = toy_problem(T)
+f = gen_Data(T)
 
 length_of_sequences = 2 * T
 maxlen = 25 
@@ -94,7 +94,7 @@ for i in range(length_of_sequences - maxlen + 1):
 plt.rc('font', family='serif')
 plt.figure()
 plt.ylim([-1.5, 1.5])
-plt.plot(toy_problem(T, ampl=0), linestyle='dotted', color='#aaaaaa')
+plt.plot(gen_Data(T, ampl=0), linestyle='dotted', color='#aaaaaa')
 plt.plot(original, linestyle='dashed', color='black')
 plt.plot(predicted, color='black')
 plt.show()
