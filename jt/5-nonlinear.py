@@ -10,19 +10,19 @@ from pandas import DataFrame, Series
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-np.random.seed(20160615)
-tf.set_random_seed(20160615)
+np.random.seed(20181204)
+tf.set_random_seed(20181204)
 
-def generate_datablock(n, mu, var, t):
+def genDataChunk(n, mu, var, t):
     data = multivariate_normal(mu, np.eye(2)*var, n)
     df = DataFrame(data, columns=['x1','x2'])
     df['t'] = t
     return df
 
-df0 = generate_datablock(30, [-7,-7], 18, 1)
-df1 = generate_datablock(30, [-7,7], 18, 0)
-df2 = generate_datablock(30, [7,-7], 18, 0)
-df3 = generate_datablock(30, [7,7], 18, 1)
+df0 = genDataChunk(30, [-7,-7], 18, 1)
+df1 = genDataChunk(30, [-7,7], 18, 0)
+df2 = genDataChunk(30, [7,-7], 18, 0)
+df3 = genDataChunk(30, [7,7], 18, 1)
 
 df = pd.concat([df0, df1, df2, df3], ignore_index=True)
 train_set = df.reindex(permutation(df.index)).reset_index(drop=True)
