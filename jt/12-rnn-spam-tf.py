@@ -27,7 +27,7 @@ learning_rate = 0.0005
 dropout_keep_prob = tf.placeholder(tf.float32)
 
 # SPAMデータのダウンロード
-data_dir = 'temp'
+data_dir = 'temp-spanData'
 data_file = 'text_data.txt'
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
