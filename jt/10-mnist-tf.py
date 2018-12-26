@@ -21,15 +21,18 @@ test_labels = mnist.test.labels
 
 size_of_batch = 100
 learning_rate = 0.005
-evaluation_size = 500
+size_to_evaluate = 500
 image_width = train_xdata[0].shape[0]
 image_height = train_xdata[0].shape[1]
 target_size = np.max(train_labels) + 1
 num_channels = 1  
 generations = 500
-eval_every = 5
+
+evaluation_period = 5
+
 conv1_features = 25
 conv2_features = 50
+
 max_pool_size1 = 2
 max_pool_size2 = 2
 fully_connected_size1 = 100
@@ -37,9 +40,9 @@ fully_connected_size1 = 100
 x_input_shape = (size_of_batch, image_width, image_height, num_channels)
 x_input = tf.placeholder(tf.float32, shape=x_input_shape)
 y_target = tf.placeholder(tf.int32, shape=(size_of_batch))
-eval_input_shape = (evaluation_size, image_width, image_height, num_channels)
+eval_input_shape = (size_to_evaluate, image_width, image_height, num_channels)
 eval_input = tf.placeholder(tf.float32, shape=eval_input_shape)
-eval_target = tf.placeholder(tf.int32, shape=(evaluation_size))
+eval_target = tf.placeholder(tf.int32, shape=(size_to_evaluate))
 
 conv1_weight = tf.Variable(tf.truncated_normal([4, 4, num_channels, conv1_features],
                                                stddev=0.1, dtype=tf.float32))
@@ -59,7 +62,8 @@ full2_weight = tf.Variable(tf.truncated_normal([fully_connected_size1, target_si
                                                stddev=0.1, dtype=tf.float32))
 full2_bias = tf.Variable(tf.truncated_normal([target_size], stddev=0.1, dtype=tf.float32))
 
-def my_conv_net(conv_input_data):
+# 3層のネットワークを構築
+def construct_my_convNet(conv_input_data):
     conv1 = tf.nn.conv2d(conv_input_data, conv1_weight, strides=[1, 1, 1, 1], padding='SAME')
     relu1 = tf.nn.relu(tf.nn.bias_add(conv1, conv1_bias))
     max_pool1 = tf.nn.max_pool(relu1, ksize=[1, max_pool_size1, max_pool_size1, 1],
@@ -79,15 +83,15 @@ def my_conv_net(conv_input_data):
     
     return final_model_output
 
-model_output = my_conv_net(x_input)
-test_model_output = my_conv_net(eval_input)
+model_output = construct_my_convNet(x_input)
+test_model_output = construct_my_convNet(eval_input)
 
 loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=model_output, labels=y_target))
 
 prediction = tf.nn.softmax(model_output)
 test_prediction = tf.nn.softmax(test_model_output)
 
-def get_accuracy(logits, targets):
+def calcurate_accuracy(logits, targets):
     batch_predictions = np.argmax(logits, axis=1)
     num_correct = np.sum(np.equal(batch_predictions, targets))
     return 100. * num_correct/batch_predictions.shape[0]
@@ -110,16 +114,16 @@ for i in range(generations):
     
     sess.run(train_step, feed_dict=train_dict)
     temp_train_loss, temp_train_preds = sess.run([loss, prediction], feed_dict=train_dict)
-    temp_train_acc = get_accuracy(temp_train_preds, rand_y)
+    temp_train_acc = calcurate_accuracy(temp_train_preds, rand_y)
     
-    if (i+1) % eval_every == 0:
-        eval_index = np.random.choice(len(test_xdata), size=evaluation_size)
+    if (i+1) % evaluation_period == 0:
+        eval_index = np.random.choice(len(test_xdata), size=size_to_evaluate)
         eval_x = test_xdata[eval_index]
         eval_x = np.expand_dims(eval_x, 3)
         eval_y = test_labels[eval_index]
         test_dict = {eval_input: eval_x, eval_target: eval_y}
         test_preds = sess.run(test_prediction, feed_dict=test_dict)
-        temp_test_acc = get_accuracy(test_preds, eval_y)
+        temp_test_acc = calcurate_accuracy(test_preds, eval_y)
         
         # Record and print results
         train_loss.append(temp_train_loss)
@@ -129,7 +133,7 @@ for i in range(generations):
         acc_and_loss = [np.round(x, 2) for x in acc_and_loss]
         print('Generation # {}. Train Loss: {:.2f}. Train Acc (Test Acc): {:.2f} ({:.2f})'.format(*acc_and_loss))
     
-eval_indices = range(0, generations, eval_every)
+eval_indices = range(0, generations, evaluation_period)
 plt.plot(eval_indices, train_loss, 'k-')
 plt.title('Softmax Loss per Generation')
 plt.xlabel('Generation')
