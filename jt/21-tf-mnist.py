@@ -5,6 +5,7 @@ import tensorflow as tf
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
+# fetching data
 mnist = input_data.read_data_sets("data/", one_hot=True)
 
 x = tf.placeholder(tf.float32, [None, 784])
@@ -15,6 +16,7 @@ convolution1 = tf.nn.conv2d(img, f1, strides=[1,1,1,1], padding='SAME')
 b1 = tf.Variable(tf.constant(0.1, shape=[32]))
 h_convolution1 = tf.nn.relu(convolution1+b1)
 
+# takes h_convolution
 h_pooling1 = tf.nn.max_pool(h_convolution1, ksize=[1,2,2,1], strides=[1,2,2,1], padding='SAME')
 
 f2 = tf.Variable(tf.truncated_normal([5,5,32,64], stddev=0.1))
@@ -25,10 +27,12 @@ h_pooling2 = tf.nn.max_pool(h_convolution2, ksize=[1,2,2,1], strides=[1,2,2,1], 
 
 h_pooling2_flat = tf.reshape(h_pooling2, [-1, 7*7*64])
 
+# relu:mutmul
 w_fc1 = tf.Variable(tf.truncated_normal([7*7*64, 1024], stddev=0.1))
 b_fc1 = tf.Variable(tf.constant(0.1, shape=[1024]))
 h_fc1 = tf.nn.relu(tf.matmul(h_pooling2_flat, w_fc1) + b_fc1)
 
+# softmax:mutmul
 w_fc2 = tf.Variable(tf.truncated_normal([1024, 10], stddev=0.1))
 b_fc2 = tf.Variable(tf.constant(0.1, shape=[10]))
 out = tf.nn.softmax(tf.matmul(h_fc1, w_fc2) + b_fc2)

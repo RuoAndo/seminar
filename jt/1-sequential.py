@@ -12,6 +12,9 @@ from keras.utils import np_utils
 #from keras import np_utils
 import numpy as np
 
+# input dimension: 512
+# output dimension: 10
+
 data = np.random.random((1024, 512))
 labels = np.random.randint(10, size=(1024, 1))
 labels = np_utils.to_categorical(labels, 10)
