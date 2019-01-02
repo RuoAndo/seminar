@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import numpy as np
 import tensorflow as tf
 from sklearn import datasets
@@ -15,7 +17,7 @@ np.random.seed(0)
 tf.set_random_seed(1234)
 
 
-def inference(x, keep_prob, n_in, n_hiddens, n_out):
+def my_network(x, keep_prob, n_in, n_hiddens, n_out):
     def weight_variable(shape):
         initial = np.sqrt(2.0 / shape[0]) * tf.truncated_normal(shape)
         return tf.Variable(initial)
@@ -44,7 +46,7 @@ def inference(x, keep_prob, n_in, n_hiddens, n_out):
     return y
 
 
-def loss(y, t):
+def get_loss(y, t):
     cross_entropy = \
         tf.reduce_mean(-tf.reduce_sum(
                        t * tf.log(tf.clip_by_value(y, 1e-10, 1.0)),
@@ -60,7 +62,7 @@ def training(loss):
     return train_step
 
 
-def accuracy(y, t):
+def get_accuracy(y, t):
     correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(t, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
     return accuracy
@@ -96,11 +98,11 @@ if __name__ == '__main__':
     t = tf.placeholder(tf.float32, shape=[None, n_out])
     keep_prob = tf.placeholder(tf.float32)
 
-    y = inference(x, keep_prob, n_in=n_in, n_hiddens=n_hiddens, n_out=n_out)
-    loss = loss(y, t)
+    y = my_network(x, keep_prob, n_in=n_in, n_hiddens=n_hiddens, n_out=n_out)
+    loss = get_loss(y, t)
     train_step = training(loss)
 
-    accuracy = accuracy(y, t)
+    accuracy = get_accuracy(y, t)
 
     history = {
         'val_loss': [],
