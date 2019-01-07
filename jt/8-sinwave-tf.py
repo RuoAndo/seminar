@@ -33,18 +33,16 @@ def network_structure(x, n_batch, maxlen=None, n_hidden=None, n_out=None):
             outputs.append(cell_output)
 
     output = outputs[-1]
-                                                                                                                                         
+
     V = weight_variable([n_hidden, n_out])
     c = bias_variable([n_out])
     y = tf.matmul(output, V) + c  
 
     return y
 
-
 def loss(y, t):
     mse = tf.reduce_mean(tf.square(y - t))
     return mse
-
 
 def training(loss):
     optimizer = \
@@ -52,7 +50,6 @@ def training(loss):
 
     train_step = optimizer.minimize(loss)
     return train_step
-
 
 class EarlyStopping():
     def __init__(self, patience=0, verbose=0):
@@ -73,7 +70,6 @@ class EarlyStopping():
             self._loss = loss
 
         return False
-
 
 if __name__ == '__main__':
     def sin(x, T=100):
@@ -122,8 +118,8 @@ if __name__ == '__main__':
     history = {
         'val_loss': []
     }
-                                                                                                                                         
-    epochs = 500
+
+    train_epochs = 500
     batch_size = 10
 
     init = tf.global_variables_initializer()
@@ -132,7 +128,7 @@ if __name__ == '__main__':
 
     n_batches = N_train // batch_size
 
-    for epoch in range(epochs):
+    for epoch in range(train_epochs):
         X_, Y_ = shuffle(X_train, Y_train)
 
         for i in range(n_batches):

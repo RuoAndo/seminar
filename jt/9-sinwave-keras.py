@@ -56,6 +56,10 @@ def weight_variable(shape, name=None):
 
 early_stopping = EarlyStopping(monitor='val_loss', patience=10, verbose=1)
 
+# cf. tensorflow..
+# cell = tf.nn.rnn_cell.BasicRNNCell(n_hidden)
+# initial_state = cell.zero_state(n_batch, tf.float32)
+
 model = Sequential()
 model.add(SimpleRNN(n_hidden,
                     kernel_initializer=weight_variable,
