@@ -8,7 +8,7 @@ from pandas import DataFrame, Series
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-np.random.seed(20160512)
+np.random.seed(201901070512)
 
 n0, mu0, variance0 = 20, [10, 11], 20
 data0 = multivariate_normal(mu0, np.eye(2)*variance0 ,n0)

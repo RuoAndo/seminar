@@ -13,16 +13,16 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 np.random.seed(20181204)
 tf.set_random_seed(20181204)
 
-def genDataChunk(n, mu, var, t):
+def generate_Data_chunk(n, mu, var, t):
     data = multivariate_normal(mu, np.eye(2)*var, n)
     df = DataFrame(data, columns=['x1','x2'])
     df['t'] = t
     return df
 
-df0 = genDataChunk(30, [-7,-7], 18, 1)
-df1 = genDataChunk(30, [-7,7], 18, 0)
-df2 = genDataChunk(30, [7,-7], 18, 0)
-df3 = genDataChunk(30, [7,7], 18, 1)
+df0 = generate_Data_chunk(30, [-7,-7], 18, 1)
+df1 = generate_Data_chunk(30, [-7,7], 18, 0)
+df2 = generate_Data_chunk(30, [7,-7], 18, 0)
+df3 = generate_Data_chunk(30, [7,7], 18, 1)
 
 df = pd.concat([df0, df1, df2, df3], ignore_index=True)
 train_set = df.reindex(permutation(df.index)).reset_index(drop=True)
@@ -30,19 +30,26 @@ train_set = df.reindex(permutation(df.index)).reset_index(drop=True)
 train_x = train_set[['x1','x2']].as_matrix()
 train_t = train_set['t'].as_matrix().reshape([len(train_set), 1])
 
+# tanh tanh  sig
+# *  -- *  -- *  
+# *  -- *  -- *
+
 num_units1 = 2
 num_units2 = 2
 
 x = tf.placeholder(tf.float32, [None, 2])
 
+# hidden layer1
 w1 = tf.Variable(tf.truncated_normal([2, num_units1]))
 b1 = tf.Variable(tf.zeros([num_units1]))
 hidden1 = tf.nn.tanh(tf.matmul(x, w1) + b1)
 
+# hiden layer2
 w2 = tf.Variable(tf.truncated_normal([num_units1, num_units2]))
 b2 = tf.Variable(tf.zeros([num_units2]))
 hidden2 = tf.nn.tanh(tf.matmul(hidden1, w2) + b2)
 
+# output layer
 w0 = tf.Variable(tf.zeros([num_units2, 1]))
 b0 = tf.Variable(tf.zeros([1]))
 p = tf.nn.sigmoid(tf.matmul(hidden2, w0) + b0)
@@ -84,5 +91,5 @@ p_vals = sess.run(p, feed_dict={x:locations})
 p_vals = p_vals.reshape((100,100))
 
 subplot.imshow(p_vals, origin='lower', extent=(-15,15,-15,15), cmap=plt.cm.gray_r, alpha=0.5)
-#plt.show()
+plt.show()
 
