@@ -12,18 +12,18 @@ tf.set_random_seed(1234)
 
 
 def network_structure(x, n_batch, maxlen=None, n_hidden=None, n_out=None):
-    def weight_variable(shape):
+    def w_variable(shape):
         initial = tf.truncated_normal(shape, stddev=0.01)
         return tf.Variable(initial)
 
-    def bias_variable(shape):
+    def b_variable(shape):
         initial = tf.zeros(shape, dtype=tf.float32)
         return tf.Variable(initial)
 
     cell = tf.nn.rnn_cell.BasicRNNCell(n_hidden)
-    initial_state = cell.zero_state(n_batch, tf.float32)
+    init_state = cell.zero_state(n_batch, tf.float32)
 
-    state = initial_state
+    state = init_state
     outputs = [] 
     with tf.variable_scope('RNN'):
         for t in range(maxlen):
@@ -34,8 +34,8 @@ def network_structure(x, n_batch, maxlen=None, n_hidden=None, n_out=None):
 
     output = outputs[-1]
 
-    V = weight_variable([n_hidden, n_out])
-    c = bias_variable([n_out])
+    V = w_variable([n_hidden, n_out])
+    c = b_variable([n_out])
     y = tf.matmul(output, V) + c  
 
     return y
@@ -48,8 +48,8 @@ def training(loss):
     optimizer = \
         tf.train.AdamOptimizer(learning_rate=0.001, beta1=0.9, beta2=0.999)
 
-    train_step = optimizer.minimize(loss)
-    return train_step
+    train_op = optimizer.minimize(loss)
+    return train_op
 
 class EarlyStopping():
     def __init__(self, patience=0, verbose=0):
@@ -112,7 +112,7 @@ if __name__ == '__main__':
 
     y = network_structure(x, n_batch, maxlen=maxlen, n_hidden=n_hidden, n_out=n_out)
     loss = loss(y, t)
-    train_step = training(loss)
+    train_op = training(loss)
 
     early_stopping = EarlyStopping(patience=10, verbose=1)
     history = {
@@ -135,7 +135,7 @@ if __name__ == '__main__':
             start = i * batch_size
             end = start + batch_size
 
-            sess.run(train_step, feed_dict={
+            sess.run(train_op, feed_dict={
                 x: X_[start:end],
                 t: Y_[start:end],
                 n_batch: batch_size
@@ -146,7 +146,7 @@ if __name__ == '__main__':
             t: Y_validation,
             n_batch: N_validation
         })
-                                                                                                                                         
+
         history['val_loss'].append(val_loss)
         print('epoch:', epoch,
               ' validation loss:', val_loss)
