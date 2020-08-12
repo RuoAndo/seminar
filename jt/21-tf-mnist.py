@@ -11,6 +11,7 @@ mnist = input_data.read_data_sets("data/", one_hot=True)
 x = tf.placeholder(tf.float32, [None, 784])
 img = tf.reshape(x,[-1,28,28,1])
 
+### pooling layer 1 ###
 f1 = tf.Variable(tf.truncated_normal([5,5,1,32], stddev=0.1))
 convolution1 = tf.nn.conv2d(img, f1, strides=[1,1,1,1], padding='SAME')
 b1 = tf.Variable(tf.constant(0.1, shape=[32]))
@@ -19,6 +20,10 @@ h_convolution1 = tf.nn.relu(convolution1+b1)
 # takes h_convolution
 h_pooling1 = tf.nn.max_pool(h_convolution1, ksize=[1,2,2,1], strides=[1,2,2,1], padding='SAME')
 
+###
+
+### pooling layer 2 ###
+
 f2 = tf.Variable(tf.truncated_normal([5,5,32,64], stddev=0.1))
 convolution2 = tf.nn.conv2d(h_pooling1, f2, strides=[1,1,1,1], padding='SAME')
 b2 = tf.Variable(tf.constant(0.1, shape=[64]))
@@ -26,6 +31,8 @@ h_convolution2 = tf.nn.relu(convolution2+b2)
 h_pooling2 = tf.nn.max_pool(h_convolution2, ksize=[1,2,2,1], strides=[1,2,2,1], padding='SAME')
 
 h_pooling2_flat = tf.reshape(h_pooling2, [-1, 7*7*64])
+
+###
 
 # relu:mutmul
 w_fc1 = tf.Variable(tf.truncated_normal([7*7*64, 1024], stddev=0.1))
@@ -58,7 +65,5 @@ with tf.Session() as sess:
         if step % 100 == 0:
             acc_val = sess.run( accuracy, feed_dict={x:test_images, y:test_labels})
             print('Step %d: accuracy = %.2f' % (step, acc_val))
-
-
 
 
