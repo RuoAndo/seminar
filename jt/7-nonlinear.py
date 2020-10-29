@@ -16,10 +16,15 @@ num_coeffs = 6
 trY_coeffs = [1, 2, 3, 4, 5, 6]
 trY = 0
 for i in range(num_coeffs):
+    #print(i)
     trY += trY_coeffs[i] * np.power(trX, i)
+    #print(trX)
+    #print(trY)
 
 trY += np.random.randn(*trX.shape) * 1.5
 
+#print(trX)
+#print(trY)
 plt.scatter(trX, trY)
 plt.show()
 
