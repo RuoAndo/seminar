@@ -13,4 +13,9 @@
 yŽÀK11z‚S‚Ì‰ðÍƒf[ƒ^‚PiŽ©“]ŽÔ—˜—p‰ñ”j 4/lstm/LSTM.ipydb
 yŽÀK12zLSTM‚É‚æ‚é‰ñ‹A 4/lstm/LSTM.ipydb
 yŽÀK13zLSTM‚É‚æ‚éˆÙíŒŸ’m 
+
+\seminar-2023-07> dir -r | grep ipynb | grep -v Untitled | wc -l
+46
+
 </pre>
+
