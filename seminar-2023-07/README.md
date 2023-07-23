@@ -2,8 +2,8 @@
 <pre>
 yÀK1z‚P‚Ì‰ğÍƒf[ƒ^i”òs—·‹q‹@‚Ìæ‹q”j1/all.ipynb
 yÀK2zARIMA‚ÆSARIMA‚ğ”äŠr‚·‚é 1/all.ipynb
-yÀK3zChangeFinder
-yÀK4zBayes Online
+yÀK3zChangeFinder 1/cp.ipynb
+yÀK4zBayes Online 1/bo.ipynb
 yÀK5z‚Q‚Ì‰ğÍƒf[ƒ^iS“d}j 2/temporal/
 yÀK6zKmeansiK•½‹Ï–@j2/temporal/kmean.ipynb
 yÀK7zHDBScaniŠK‘wDBScan) temporal/hdbscan.ipynb
