@@ -1,1 +1,1 @@
-<img src="sarima.png">
+<img src="sarima.png" width=70%>
