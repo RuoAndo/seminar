@@ -1,18 +1,25 @@
-# ���K�ƃv���O����
+# 構成
 <pre>
-�y���K1�z�P�̉�̓f�[�^�i��s���q�@�̏�q���j1/all.ipynb
-�y���K2�zARIMA��SARIMA���r���� 1/all.ipynb
-�y���K3�zChangeFinder 1/cp.ipynb
-�y���K4�zBayes Online 1/bo.ipynb
-�y���K5�z�Q�̉�̓f�[�^�i�S�d�}�j 2/temporal/
-�y���K6�zKmeans�iK���ϖ@�j2/temporal/kmean.ipynb
-�y���K7�zHDBScan�i�K�wDBScan) temporal/hdbscan.ipynb
-�y���K8�z���̋C���f�[�^ 2/kishou/all.ipynb
-�y���K9�z�R�̉�̓f�[�^ �i�{�X�g���̏Z��i�j3/decision-tree/all.ipynb
-�y���K10�z����؎�@�̗��p 3/decision-tree/all.ipynb
-�y���K11�z�S�̉�̓f�[�^�P�i���]�ԗ��p�񐔁j 4/lstm/LSTM.ipydb
-�y���K12�zLSTM�ɂ���A 4/lstm/LSTM.ipydb
-�y���K13�zLSTM�ɂ��ُ팟�m 
+統計的手法（自己回帰型モデル）と異常検知
+教師なし学習による時系列データの分類
+決定木手法による時系列データの回帰
+カルマンフィルタ・深層学習による回帰と異常検知
+</pre>
+# 実習とプログラム
+<pre>
+【実習1】１の解析データ（飛行旅客機の乗客数）1/all.ipynb
+【実習2】ARIMAとSARIMAを比較する 1/all.ipynb
+【実習3】ChangeFinder 1/cp.ipynb
+【実習4】Bayes Online 1/bo.ipynb
+【実習5】２の解析データ（心電図） 2/temporal/
+【実習6】Kmeans（K平均法）2/temporal/kmean.ipynb
+【実習7】HDBScan（階層DBScan) temporal/hdbscan.ipynb
+【実習8】大阪の気温データ 2/kishou/all.ipynb
+【実習9】３の解析データ （ボストンの住宅価格）3/decision-tree/all.ipynb
+【実習10】決定木手法の利用 3/decision-tree/all.ipynb
+【実習11】４の解析データ１（自転車利用回数） 4/lstm/LSTM.ipydb
+【実習12】LSTMによる回帰 4/lstm/LSTM.ipydb
+【実習13】LSTMによる異常検知 
 
 \seminar-2023-07> dir -r | grep ipynb | grep -v Untitled | wc -l
 46
